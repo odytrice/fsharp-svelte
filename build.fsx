@@ -18,7 +18,7 @@ Target.create "Clean" (fun _ ->
     run npm [ "run"; "clean" ] clientPath
 )
 
-Target.create "RestoreClientDependencies" (fun _ -> run npm [ "ci" ] clientPath)
+Target.create "RestoreClientDependencies" (fun _ -> run npm [ "install" ] clientPath)
 
 Target.create "Bundle" (fun _ ->
     runParallel [
