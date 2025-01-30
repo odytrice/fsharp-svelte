@@ -14,7 +14,8 @@ This project is a starter template to build Single Page Applications using F# (G
 
 # Running
 
-1. Clone the Repository
+1. Run `npx degit odytrice/fsharp-svelte my-app`
+2. Run `cd my-app`
 2. Run `dotnet fsi build.fsx -t run`
 3. Navigate to http://localhost:3000
 
