@@ -15,32 +15,33 @@ let deployPath = Path.getFullName ".deploy"
 
 Target.create "Clean" (fun _ ->
     Shell.cleanDir deployPath
+    run dotnet ["clean"] serverPath
     run npm [ "run"; "clean" ] clientPath
 )
 
-Target.create "RestoreClientDependencies" (fun _ -> run npm [ "ci" ] clientPath)
-
-Target.create "Bundle" (fun _ ->
-    runParallel [
-        "server", dotnet [ "publish"; "-c"; "Release"; "-o"; deployPath ] serverPath
-        "client", npm [ "run"; "build"; ] clientPath
-    ]
-    let publicDir = Path.combine deployPath "public"
-    let clientDeployPath = Path.combine clientPath "dist"
-    Shell.copyDir publicDir clientDeployPath FileFilter.allFiles)
+Target.create "RestoreClientDependencies" (fun _ -> run npm [ "install" ] clientPath)
 
 Target.create "Build" (fun _ ->
     run dotnet [ "build" ] serverPath
     run npm [ "run"; "build" ] clientPath
-    )
+)
+
+Target.create "Bundle" (fun _ ->
+    let publicDir = Path.combine deployPath "public"
+    let clientDeployPath = Path.combine clientPath "dist"
+
+    run dotnet [ "publish"; "-c"; "Release"; "-o"; deployPath ] serverPath
+    run npm [ "run"; "build"; ] clientPath
+
+    Shell.copyDir publicDir clientDeployPath FileFilter.allFiles
+)
 
 Target.create "Run" (fun _ ->
-    [
+    runParallel [
         "server", dotnet [ "watch"; "run"; "--no-restore" ] serverPath
         "client", npm [ "run"; "dev"; ] clientPath
     ]
-    |> runParallel)
-
+)
 
 Target.create "Format" (fun _ -> run dotnet [ "fantomas"; "." ] serverPath)
 
