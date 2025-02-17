@@ -8,7 +8,7 @@
 
     onMount(async () => {
         let response = await fetch('/api/hello');
-        let data = await response.json() as Message
+        let data = await response.json() as Server.Message
         message = data.text
     })
 

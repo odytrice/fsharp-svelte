@@ -1,3 +1,5 @@
-type Message = {
-    text: string
+namespace Server {
+    type Message = {
+        text: string
+    }
 }
