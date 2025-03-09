@@ -1,16 +1,17 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
     import svelteLogo from './assets/svelte.svg'
     import fsharpLogo from '/fsharp.svg'
     import Counter from './lib/Counter.svelte'
 
     let message = $state("")
 
-    onMount(async () => {
+    async function fetchData() {
         let response = await fetch('/api/hello');
         let data = await response.json() as Server.Message
         message = data.text
-    })
+    }
+
+    fetchData()
 
 </script>
 
