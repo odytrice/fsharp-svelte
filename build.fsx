@@ -9,9 +9,10 @@ open Helpers
 
 initializeContext ()
 
-let serverPath = Path.getFullName "Server"
-let clientPath = Path.getFullName "Client"
+let serverPath = Path.getFullName "src/Server"
+let clientPath = Path.getFullName "src/Client"
 let deployPath = Path.getFullName ".deploy"
+let serverTestsPath = Path.getFullName "test/Server.Tests"
 
 Target.create "Clean" (fun _ ->
     Shell.cleanDir deployPath
@@ -42,6 +43,8 @@ Target.create "Run" (fun _ ->
         "client", npm [ "run"; "dev"; ] clientPath
     ]
 )
+
+Target.create "Test" (fun _ -> run dotnet ["test"] serverTestsPath)
 
 Target.create "Format" (fun _ -> run dotnet [ "fantomas"; "." ] serverPath)
 

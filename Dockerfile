@@ -20,12 +20,12 @@ RUN dotnet tool restore
 
 # Dotnet Package Restore
 WORKDIR /root/build/Server
-COPY ./Server/Server.fsproj .
+COPY ./src/Server/Server.fsproj .
 RUN dotnet restore
 
 # NPM Restore
 WORKDIR /root/build/Client
-COPY ./Client/package*.json .
+COPY ./src/Client/package*.json .
 RUN npm ci
 
 WORKDIR /root/build
@@ -33,6 +33,9 @@ WORKDIR /root/build
 COPY . .
 
 # Build
+RUN dotnet build
+
+# Bundle
 RUN dotnet fsi build.fsx -t bundle
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
