@@ -1,6 +1,6 @@
 # F# Svelte Starter Project
 
-<img src="./Client/public/fsharp-svelte.svg" height="200">
+<img src="./src/Client/public/fsharp-svelte.svg" height="200">
 
 
 This project is a starter template to build Single Page Applications using F# (Giraffe) and Svelte. It is bundled together with a Fake script
