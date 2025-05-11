@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 as build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 # Install NodeJS
 ENV NODE_VERSION=22.4.0
