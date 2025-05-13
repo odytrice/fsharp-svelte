@@ -1,27 +1,30 @@
 <script lang="ts">
-    import svelteLogo from './assets/svelte.svg'
-    import fsharpLogo from '/fsharp.svg'
-    import Counter from './lib/Counter.svelte'
+    import svelteLogo from "./assets/svelte.svg";
+    import fsharpLogo from "/fsharp.svg";
+    import Counter from "./lib/Counter.svelte";
 
-    let message = $state("")
+    let message = $state("");
 
     async function fetchData() {
-        let response = await fetch('/api/hello');
-        let data = await response.json() as Server.Message
-        message = data.text
+        let response = await fetch("/api/hello");
+        let data = (await response.json()) as Server.Message;
+        message = data.text;
     }
 
-    fetchData()
-
+    fetchData();
 </script>
 
 <main>
     <div>
-        <a href="https://dotnet.microsoft.com/en-us/languages/fsharp" target="_blank" rel="noreferrer">
-            <img src={fsharpLogo} class="logo" alt="Vite Logo"/>
+        <a
+            href="https://dotnet.microsoft.com/en-us/languages/fsharp"
+            target="_blank"
+            rel="noreferrer"
+        >
+            <img src={fsharpLogo} class="logo" alt="Vite Logo" />
         </a>
         <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-            <img src={svelteLogo} class="logo svelte" alt="Svelte Logo"/>
+            <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
         </a>
     </div>
     <h1>F# + Svelte</h1>
@@ -29,12 +32,10 @@
     <div>{message}</div>
 
     <div class="card">
-        <Counter/>
+        <Counter />
     </div>
 
-    <p class="read-the-docs">
-        Click on the F# and Svelte logos to learn more
-    </p>
+    <p class="read-the-docs">Click on the F# and Svelte logos to learn more</p>
 </main>
 
 <style>
