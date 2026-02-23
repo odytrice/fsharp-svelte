@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 
 # Install NodeJS
 ENV NODE_VERSION=22.4.0
@@ -38,7 +38,7 @@ RUN dotnet build
 # Bundle
 RUN dotnet fsi build.fsx -t bundle
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /root/app/
 
 COPY --from=build /root/build/.deploy ./
